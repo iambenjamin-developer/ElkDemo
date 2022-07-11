@@ -37,8 +37,11 @@ namespace ElkDemo.Controllers
 
 
         [HttpPost]
-        public void Post([FromBody] User value)
+        public async Task<string> Post([FromBody] User value)
         {
+            var response = await _elasticClient.IndexAsync<User>(value, x => x.Index("users"));
+
+            return response.Id;
         }
 
 
