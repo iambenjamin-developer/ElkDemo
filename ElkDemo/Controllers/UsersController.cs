@@ -20,12 +20,19 @@ namespace ElkDemo.Controllers
         [HttpGet("{id}")]
         public async Task<User> Get(string id)
         {
+            /*
 
             var response = await _elasticClient.SearchAsync<User>(s => s
                             .Index("users")
                             .Query(q => q.Match(m => m.Field(f => f.Name).Query(id))));
 
             return response?.Documents?.FirstOrDefault();
+            */
+
+            var response = await _elasticClient.GetAsync<User>(new DocumentPath<User>(
+                new Id(id)), x => x.Index("users"));
+
+            return response?.Source;
         }
 
 
