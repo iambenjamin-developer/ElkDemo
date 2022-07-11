@@ -35,8 +35,7 @@ namespace ElkDemo
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ElkDemo", Version = "v1" });
             });
 
-            var settings = new ConnectionSettings()
-                           .DefaultMappingFor<User>(x => x.IndexName("users"));
+            var settings = new ConnectionSettings();
             services.AddSingleton<IElasticClient>(new ElasticClient(settings));
         }
 

@@ -22,8 +22,8 @@ namespace ElkDemo.Controllers
         {
 
             var response = await _elasticClient.SearchAsync<User>(s => s
-                            .Query(q => q.Term(t => t.Name, id) ||
-                            q.Match(m => m.Field(f => f.Name).Query(id))));
+                            .Index("users")
+                            .Query(q => q.Match(m => m.Field(f => f.Name).Query(id))));
 
             return response?.Documents?.FirstOrDefault();
         }
